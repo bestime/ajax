@@ -12,50 +12,8 @@
     }
   }
 
-  // 序列化，复制的自己的ParamData仓库
-  function param (data) {
-    var res = [];
-    function addOne (key, value) {
-      value = typeof value === 'function' ? value() : value;
-      value = value === undefined || value === null || typeof value === 'undefined' ? '' : value
-      res[res.length] = encodeURIComponent(key) + '=' + encodeURIComponent(value)
-    }    
-    buildParam('', data)
-    function buildParam (prefix, item) {
-      var index, objKey;
-      if(prefix) {
-        switch (getType(item)) {
-          case 'Array':
-            for(index=0; index<item.length; index++) {
-              buildParam(prefix + '['+ (typeof item[index]==='object' && item[index] ? index : '') +']', item[index])
-            }
-            break;
-          case 'Object':
-            for(objKey in item) {
-              buildParam(prefix + '[' + objKey + ']', item[objKey])
-            }
-            break;
-          default:
-            addOne(prefix, item)
-        }
-      } else {
-        switch (getType(item)) {
-          case 'String':
-          case 'Object':
-            for(objKey in item) {
-              buildParam(objKey, item[objKey])
-            }
-            break;
-          case 'Array':
-            for(index=0; index<item.length; index++) {
-              addOne(item[index].name, item[index].value)
-            }
-            break;
-        }
-      }
-    }    
-    return res.join('&')
-  };
+  function param(g){function f(c,a){a="function"===typeof a?a():a;a=void 0===a||null===a||"undefined"===typeof a?"":a;e[e.length]=encodeURIComponent(c)+"="+encodeURIComponent(a)}function d(c,a){var b;if(c)switch(getType(a)){case "Array":for(b=0;b<a.length;b++)d(c+"["+("object"===typeof a[b]&&a[b]?b:"")+"]",a[b]);break;case "Object":for(b in a)d(c+"["+b+"]",a[b]);break;default:f(c,a)}else switch(getType(a)){case "String":case "Object":for(b in a)d(b,a[b]);break;case "Array":for(b=0;b<a.length;b++)f(a[b].name,
+    a[b].value)}}var e=[];d("",g);return e.join("&")};
 
   function tempFunc () {}
 
@@ -76,41 +34,38 @@
     var timeout = Number(opt.timeout) || 1000 * 10
     timeout = timeout < 1000 ? 1000 : timeout
 
-    if (type === 'GET' && data) {
-			url += (/\?/g.test(url) ? '&' : '?') + data
-    }
+    if (type === 'GET' && data) url += (/\?/g.test(url) ? '&' : '?') + data;
     
     // 执行ajax
     var xhr, timer;
-		try {
-			xhr = new XMLHttpRequest();
-		} catch (e) {
-			xhr = new ActiveXObject('Microsoft.XMLHTTP');
-    }	
-		
-    xhr.open(type, url, true);
+    try {
+      xhr = new XMLHttpRequest();
+    } catch (e) {
+      xhr = new ActiveXObject('Microsoft.XMLHTTP');
+    }
     
-		if (type == 'GET') {
-			xhr.send();
-		} else {
-			xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
-			xhr.send(data);
-		}
-		
+    xhr.open(type, url, true);
+    if (type == 'GET') {
+      xhr.send();
+    } else {
+      hr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+      xhr.send(data);
+    }
+    
 		xhr.onreadystatechange = function() {
-			if ( xhr.readyState == 4 ) {
-				if ( xhr.status == 200 ) {
+      if ( xhr.readyState == 4 ) {
+        if ( xhr.status == 200 ) {
           var res = xhr.responseText 
           try {
             res = JSON.parse(res)
           } catch (e) {}
-					success(res);
-				} else {
-					error(xhr);
-				}
-			}
+          success(res);
+        } else {
+          error(xhr);
+        }
+      }
     }
-
+    
     // 取消请求
     function cancel (msg) {
       xhr.msg = msg
