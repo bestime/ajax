@@ -34,7 +34,7 @@
     var timeout = Number(opt.timeout) || 1000 * 10
     timeout = timeout < 1000 ? 1000 : timeout
 
-    if (type === 'GET' && data) url += (/\?/g.test(url) ? '&' : '?') + data;
+   
     
     // 执行ajax
     var xhr, timer;
@@ -44,11 +44,14 @@
       xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
     
-    xhr.open(type, url, true);
     if (type == 'GET') {
+      url += (/\?/g.test(url) ? '&' : '?') + data;
+      url += (data ? '&' : '') + 'ajax=' + +new Date()  
+      xhr.open(type, url, true);
       xhr.send();
     } else {
-      hr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+      xhr.open(type, url, true);
+      xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
       xhr.send(data);
     }
     
