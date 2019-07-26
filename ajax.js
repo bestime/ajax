@@ -45,19 +45,18 @@
     if (type === 'GET') {
       url += (/\?/g.test(url) ? '&' : '?') + data;
       url += (data ? '&' : '') + 'ajax=' + +new Date()
+      data = ''
     }
-    
+
     xhr.open(type, url, true);
     xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
-    xhr.send(type==='GET' ? '' : data);
+    xhr.send(data);
     
     xhr.onreadystatechange = function() {
       if ( xhr.readyState == 4 ) {
         if ( xhr.status == 200 ) {
           var res = xhr.responseText 
-          try {
-            res = JSON.parse(res)
-          } catch (e) {}
+          try { res = JSON.parse(res) } catch (e) {}
           success(res);
         } else {
           error(xhr);
