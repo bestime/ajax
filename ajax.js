@@ -33,8 +33,6 @@
     var error = _Function(opt.error)
     var timeout = Number(opt.timeout) || 1000 * 10
     timeout = timeout < 1000 ? 1000 : timeout
-
-   
     
     // 执行ajax
     var xhr, timer;
@@ -44,16 +42,14 @@
       xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
     
-    if (type == 'GET') {
+    if (type === 'GET') {
       url += (/\?/g.test(url) ? '&' : '?') + data;
-      url += (data ? '&' : '') + 'ajax=' + +new Date()  
-      xhr.open(type, url, true);
-      xhr.send();
-    } else {
-      xhr.open(type, url, true);
-      xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
-      xhr.send(data);
+      url += (data ? '&' : '') + 'ajax=' + +new Date()
     }
+    
+    xhr.open(type, url, true);
+    xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+    xhr.send(type==='GET' ? '' : data);
     
     xhr.onreadystatechange = function() {
       if ( xhr.readyState == 4 ) {
