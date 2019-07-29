@@ -34,24 +34,22 @@
     var timeout = Number(opt.timeout) || 1000 * 10
     timeout = timeout < 1000 ? 1000 : timeout
     
-    // 执行ajax
+    // GET方式拼接url并清空data
+    if (type === 'GET') {
+      url += (/\?/g.test(url) ? '&' : '?') + data;
+      url += (data ? '&' : '') + 'ajax_time=' + +new Date()
+      data = null
+    }
+    
+    /********** ajax start **************/
     var xhr, timer;
     try {
       xhr = new XMLHttpRequest();
     } catch (e) {
       xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
-    
-    if (type === 'GET') {
-      url += (/\?/g.test(url) ? '&' : '?') + data;
-      url += (data ? '&' : '') + 'ajax=' + +new Date()
-      data = ''
-    }
-
     xhr.open(type, url, true);
     xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
-    xhr.send(data);
-    
     xhr.onreadystatechange = function() {
       if ( xhr.readyState == 4 ) {
         if ( xhr.status == 200 ) {
@@ -63,18 +61,20 @@
         }
       }
     }
+    xhr.send(data);
+    
+    // 处理超时
+    timer = setTimeout(function () {
+      cancel('time out')
+    }, timeout);
+    /********** ajax end **************/
     
     // 取消请求
     function cancel (msg) {
       xhr.msg = msg
       xhr.abort()
     }
-
-    // 处理超时
-    timer = setTimeout(function () {
-      cancel('time out')
-    }, timeout)
-
+    
     return {
       // 终止请求
       abort: function () {
