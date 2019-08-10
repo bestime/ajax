@@ -1,3 +1,15 @@
+#### 安装
+```
+npm i bestime-ajax
+
+const ajax = require('bestime-ajax')
+或
+import ajax from 'bestime-ajax'
+```
+```javascript
+<script src="https://cdn.jsdelivr.net/npm/bestime-ajax@latest/ajax.js"></script>
+```
+
 #### 参数详解
 |    参数  |   类型   |  必填  |    默认   |  描述  |
 | -------- | -----:   | -----: | -----:    | -----:  |

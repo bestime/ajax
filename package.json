@@ -1,0 +1,24 @@
+{
+  "name": "bestime-ajax",
+  "version": "1.0.0",
+  "description": "bestime's ajax",
+  "main": "ajax.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bestime/ajax.git"
+  },
+  "keywords": [
+    "bestime",
+    "ajax",
+    "javascript"
+  ],
+  "author": "bestime",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bestime/ajax/issues"
+  },
+  "homepage": "https://github.com/bestime/ajax#readme"
+}
