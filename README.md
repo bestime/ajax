@@ -22,7 +22,7 @@ import ajax from 'bestime-ajax'
 | data     | Object   |  否    | undefined | 发送的数据 |
 | success  | Function |  否    | undefined | 成功回调   |
 | error    | Function |  否    | undefined | 失败回调   |
-| timeout  | Number   |  否    | 1000 * 10 | 超时时间，单位（毫秒） |
+| timeout  | Number   |  否    | 1000 * 15 | 超时时间，单位（毫秒） |
 
 #### 实例化对象
 |    参数  |   类型   |  描述  |

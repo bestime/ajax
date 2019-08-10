@@ -31,7 +31,7 @@
     var data = param(opt.data)
     var success = _Function(opt.success)
     var error = _Function(opt.error)
-    var timeout = 10000 * 10;
+    var timeout = 1000 * 15;
 
     if(getType(opt.timeout) === 'Number') {
       timeout = opt.timeout < 20 ? 20 : opt.timeout
