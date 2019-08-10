@@ -1,12 +1,17 @@
 #### 安装
 ```
 npm i bestime-ajax
-
-const ajax = require('bestime-ajax')
-或
-import ajax from 'bestime-ajax'
 ```
+
+#### 引入到项目
 ```javascript
+// 方式一
+const ajax = require('bestime-ajax')
+
+// 方式二
+import ajax from 'bestime-ajax'
+
+// 方式三
 <script src="https://cdn.jsdelivr.net/npm/bestime-ajax@latest/ajax.js"></script>
 ```
 
