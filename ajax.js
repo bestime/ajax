@@ -31,8 +31,11 @@
     var data = param(opt.data)
     var success = _Function(opt.success)
     var error = _Function(opt.error)
-    var timeout = Number(opt.timeout) || 1000 * 10
-    timeout = timeout < 1000 ? 1000 : timeout
+    var timeout = 10000 * 10;
+
+    if(getType(opt.timeout) === 'Number') {
+      timeout = opt.timeout < 20 ? 20 : opt.timeout
+    }
     
     // GET方式拼接url并清空data
     if (type === 'GET') {
