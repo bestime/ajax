@@ -1,5 +1,5 @@
 #### 安装
-```
+```javascript
 npm i bestime-ajax
 ```
 
