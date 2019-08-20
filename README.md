@@ -16,13 +16,15 @@ import ajax from 'bestime-ajax'
 ```
 
 #### 参数详解
-|    参数  |   类型   |  必填  |    默认   |  描述  |
-| -------- | -----:   | -----: | -----:    | -----:  |
-| url      | String   | `是`   | undefined | 请求的地址   |
-| data     | Object   |  否    | undefined | 发送的数据 |
-| success  | Function |  否    | undefined | 成功回调   |
-| error    | Function |  否    | undefined | 失败回调   |
-| timeout  | Number   |  否    | 1000 * 15 | 超时时间，单位（毫秒） |
+|    参数      |   类型            |  必填  |    默认                           |  描述  |
+| --------     | -----:           | -----: | -----:                            | -----:  |
+| url          | String           |  `是`   | undefined                         | 请求的地址   |
+| data         | Object           |  否    | undefined                         | 发送的数据 |
+| success      | Function          |  否    | undefined                          | 成功回调   |
+| processData  | Boolean           |  否    | true                              | 是否转换数据   |
+| contentType  | String 或 Boolean  |  否   | application/x-www-form-urlencoded | 失败回调   |
+| error        |  Function         |  否    | undefined                         | 失败回调   |
+| timeout      | Number            |  否    | 1000 * 15                         | 超时时间，单位（毫秒） |
 
 #### 实例化对象
 |    参数  |   类型   |  描述  |

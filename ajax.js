@@ -28,7 +28,8 @@
   function ajax (opt) {
     var url = opt.url
     var type = opt.type || 'GET'
-    var data = param(opt.data)
+    var processData = opt.processData === false ? false : true; // 是否转换数据
+    var data = processData ? param(opt.data) : opt.data; 
     var success = _Function(opt.success)
     var error = _Function(opt.error)
     var timeout = 1000 * 15;
@@ -38,10 +39,12 @@
     }
     
     // GET方式拼接url并清空data
-    if (type === 'GET') {
-      url += (/\?/g.test(url) ? '&' : '?') + data;
-      url += (data ? '&' : '') + 'ajax_time=' + +new Date()
-      data = null
+    switch (type) {
+      case 'GET':
+        url += (/\?/g.test(url) ? '&' : '?') + data;
+        url += (data ? '&' : '') + 'ajax_time=' + +new Date()
+        data = null
+        break;
     }
     
     /********** ajax start **************/
@@ -52,7 +55,16 @@
       xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
     xhr.open(type, url, true);
-    xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+    if(opt.contentType!==false) {
+      if(opt.contentType) {
+        console.log(1)
+        xhr.setRequestHeader('content-type', opt.contentType);
+      } else {
+        console.log(2)
+        xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+      }
+    }
+    
     xhr.onreadystatechange = function() {
       if ( xhr.readyState == 4 ) {
         if ( xhr.status == 200 ) {

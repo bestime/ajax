@@ -4,25 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://bestime.github.io/tool/css/bestime.css" rel="stylesheet" type="text/css">
+  <script src="https://bestime.github.io/tool/js/bestime.min.js"></script>
   <title>原生ajax</title>
 </head>
 <body>
+  <input type="file" id="demo" onChange="fileSelected()"/>
   <script src="ajax.js"></script>
 
   <script>
-    console.log('ajax', ajax)
-    ajax({
-      url: 'http://www.baidu.com',
-      data: {
-        wd: '前端'
-      },
-      success: function (res) {
-        console.log('成功', res)
-      },
-      error: function (err) {
-        console.log('失败', err)
-      }
-    })
+    function fileSelected (e) {
+      var file = document.getElementById('demo').files
+      var formData = new FormData();
+      formData.append('file', document.getElementById('demo').files[0])
+
+
+      ns.loading.show()
+      ajax({
+        url: 'http://xdl.94wzh.com/img/alioss/upload',
+        type: 'POST',
+        processData: false,
+        contentType: false,
+        data: formData,
+        success: function (res) {
+          ns.loading.close()
+          if(res.code==1) {
+            ns.dialog({ msg: res.img_url })
+          }else {
+            ns.dialog({ msg: '上传出错' })
+          }
+        },
+        error: function (e) {
+          ns.loading.close()
+          ns.dialog({ msg: e})
+        }
+      })
+    }
   </script>
 </body>
 </html>
