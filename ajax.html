@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://bestime.github.io/tool/css/bestime.css" rel="stylesheet" type="text/css">
-  <script src="https://bestime.github.io/tool/js/bestime.min.js"></script>
+  <link href="http://www.bestime.com/tool/css/bestime.css" rel="stylesheet" type="text/css">
+  <script src="http://www.bestime.com/tool/js/bestime/bestime@beta.min.js"></script>
   <title>原生ajax</title>
 </head>
 <body>
@@ -13,33 +13,12 @@
   <script src="ajax.js"></script>
 
   <script>
-    function fileSelected (e) {
-      var file = document.getElementById('demo').files
-      var formData = new FormData();
-      formData.append('file', document.getElementById('demo').files[0])
-
-
-      ns.loading.show()
-      ajax({
-        url: 'http://xdl.94wzh.com/img/alioss/upload',
-        type: 'POST',
-        processData: false,
-        contentType: false,
-        data: formData,
-        success: function (res) {
-          ns.loading.close()
-          if(res.code==1) {
-            ns.dialog({ msg: res.img_url })
-          }else {
-            ns.dialog({ msg: '上传出错' })
-          }
-        },
-        error: function (e) {
-          ns.loading.close()
-          ns.dialog({ msg: e})
-        }
-      })
-    }
+    ajax({
+      url: 'http://192.168.0.224:99/ajax/async-demo-data.js',
+      success: function (data) {
+        console.log('data', data)
+      }
+    })
   </script>
 </body>
 </html>

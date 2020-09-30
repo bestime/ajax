@@ -57,10 +57,8 @@
     xhr.open(type, url, true);
     if(opt.contentType!==false) {
       if(opt.contentType) {
-        console.log(1)
         xhr.setRequestHeader('content-type', opt.contentType);
       } else {
-        console.log(2)
         xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
       }
     }
@@ -94,7 +92,6 @@
       // 终止请求
       abort: function () {
         clearTimeout(timer)
-        cancel('cancel')
       }
     }
   };
